@@ -40,43 +40,24 @@ window.onload = function() {
     hideAll(); // remove any child elements from the preview window
 
     var _this = e.target; // capture _this as the target clicked.
-    
-    function Grow(){
+    var time;
+    function move(){
+      requestAnimationFrame(move);
+      var now = new Date().getTime(),
+          dt = now - (time || now);
+   
+      time = now;
 
-      var growStartTime;
-      var growDuration = 600;
-
-      this.startGrow = function() {
-        growStartTime = Date.now();
-        requestAnimationFrame(update);
-      };
-
-      function update() {
-        var currentTime = Date.now();
-        var positionInGrow = (currentTime - growStartTime) / growDuration;
-        var baseline = positionInGrow * 100;
-
-          _this.style.transform = "translateY(-150px)";
-
-          _this.style.height =  Math.floor(baseline) * 5.0 + "px";
-          _this.style.width =  Math.floor(baseline) * 1 + "%";  
-        
-          
-          
-      if (positionInGrow <= 1)
-        requestAnimationFrame(update);
+      // Drawing code goes here... for example updating an 'x' position:
+      _this.x= 100 * dt; // Increase 'x' by 10 units per millisecond
+      _this.style.top = 1 * dt; // Increase 'x' by 10 units per millisecond
       }
-    };
-      var gallery = new Grow();
-
-      gallery.startGrow();
-
+     
+   move();
   } // animated
 
-
   for(var i = 0; i < allItems.length; i++){
-
     allItems[i].addEventListener("click", animate); 
-  } 
+  } // handle animation clicks
 
 };// onload

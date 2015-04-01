@@ -198,7 +198,14 @@ a.trigger.open .close {
   height: 654px;
   width: 100%;
   border: 2px solid #e1e1e1;
+  position: relative;
+  overflow: hidden;
 }
+#gallery-items{
+  height: 150px;
+  width: 100%;
+}
+
 #gallery #preview{
   display:block;
   height: 500px;
@@ -208,40 +215,32 @@ a.trigger.open .close {
   text-align:center;
   background: #e1e1e1;
   border: 1px solid #fff;
-
 }
-#gallery #preview img{
+#gallery-items img{
   height: 150px;
   width: 182px;
   margin: 0 auto;
-}
-#gallery ul{
-  height: 150px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0;
-    background: #e1e1e1;
+  bottom: 0;
+  position: absolute;
+  cursor: pointer;
 }
 
-#gallery ul li{
-  height: 100%;
-  width: calc(100% / 5);
-  background: transarent;
-  margin: 0 auto;
-  padding: 0;
-  float: left;
-  list-style:none;
-  overflow:hidden;
-  border: 1px solid #fff;
+#gallery-items img:nth-child(1){
+transform: translate(0,0);
+}
+#gallery-items img:nth-child(2){
+  transform: translate(100%,0);
+}
+#gallery-items img:nth-child(3){
+  transform: translate(200%,0);
+}
+#gallery-items img:nth-child(4){
+  transform: translate(300%,0);
+}
+#gallery-items img:nth-child(5){
+  transform: translate(400%,0);
 }
 
-#gallery ul li a{
-  display:block;
-}
-#gallery ul li a img{
-  height: 150px;
-  width: 182px;
-}
 .active{
 
 }
