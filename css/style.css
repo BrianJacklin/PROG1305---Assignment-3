@@ -106,22 +106,27 @@ strong, b {
 .gallery-item:nth-child(2){
   left: 0;
   bottom:0;
+  background: #09c;
 }
 .gallery-item:nth-child(3){
   left: calc(182px * 1);
   bottom:0;
+  background: #f7941e;
 }
 .gallery-item:nth-child(4){
   left: calc(182px * 2);
   bottom:0;
+  background: purple;
 }
 .gallery-item:nth-child(5){
   left: calc(182px * 3);
   bottom:0;
+  background: tomato;
 }
 .gallery-item:nth-child(6){
   left: calc(182px * 4);
   bottom:0;
+  background: teal;
 }
 
 .active{
