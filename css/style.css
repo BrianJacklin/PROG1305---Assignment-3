@@ -105,28 +105,32 @@ strong, b {
 
 .gallery-item:nth-child(2){
   transform: translate(0, 0);
-
-  bottom:0;
+  1left: calc(182px * 0);
+  top: 500px;
   background: #09c;
 }
 .gallery-item:nth-child(3){
   transform: translate(calc(180px * 1), 0);
-  bottom:0;
+  1left: calc(182px * 1);
+  top: 500px;
   background: #f7941e;
 }
 .gallery-item:nth-child(4){
   transform: translate(calc(180px * 2), 0);
-  bottom:0;
+  1left: calc(182px * 2);
+  top: 500px;
   background: purple;
 }
 .gallery-item:nth-child(5){
   transform: translate(calc(180px * 3), 0);
-  bottom:0;
+  1left: calc(182px * 3);
+  top: 500px;
   background: tomato;
 }
 .gallery-item:nth-child(6){
   transform: translate(calc(180px * 4), 0);
-  bottom:0;
+  1left: calc(182px * 4);
+  top: 500px;
   background: teal;
 }
 
