@@ -11,6 +11,7 @@ function animate(e){
   function Gallery(){
     var startTime;
     var duration = 1000;
+    var isDone;
 
     this.moveUp = function (){
       var requestID = 0;
@@ -30,12 +31,11 @@ function animate(e){
       console.log("up - " + progress);
       
       if(progress <= 1){
-
         _this.style.top = 500 - (progress * (500)) + "px";
         _this.style.left = 0 - (progress * 1) + "px";
         _this.style.height = (progress * 500) + "px";
         _this.style.width = (progress * 100) + "%";
-        
+    
         progress = 1;
         requestID = requestAnimationFrame(up);
       };
@@ -46,9 +46,8 @@ function animate(e){
       var progress = (currentTime - startTime) / duration;
       console.log("down - " + progress);
       
-      if(progress <= 1){
+      if(progress <= 1 ){
         _this.style.top = 1 + (progress * 500 ) + "px";
-       // _this.style.left = 150 + "px";
         _this.style.height = 100 + (progress * 50) + "px";
         _this.style.width = 180 + (progress * 1) + "px";
         progress = 1;
@@ -64,15 +63,13 @@ function animate(e){
   
   //check if the item is already up, if it is, bring it down.
   if(_this.classList.contains("active")){
-        gallery.moveBack();
-        _this.classList.remove("active");
+    gallery.moveBack();
+    _this.classList.remove("active");
 
   }else{
     gallery.moveUp();
     _this.classList.add("active")
   }
-
-  
 };
   
 for(var i = 0; i < allItems.length; i++){
