@@ -1,45 +1,78 @@
-
-window.onload = function() {
-
-
+window.addEventListener('load', function () {
 
 var $ = function (selector){return document.querySelector(selector);};  // this is not jQuery
-var allItems = document.querySelectorAll(".gallery-item");
+var allItems = $("#gallery").querySelectorAll(".gallery-item");
 var preview = $("#preview");
 var isUp = false;
-var requestID = 0;
 var fps = 1000/60;
-var posX = 150;
-var posY = 150;
-var delta = 100;
 
+function animate(e){
+  var _this = e.target;
 
-function moveUp(e){
-  isUp = true;
-  e = e || window.event;
-  var target = e.target || e.srcElement;
-  console.log(target);
-  posY += 10;
-  posX += 10;
+  function Gallery(){
+    var startTime;
+    var duration = 1000;
 
-  target.style.top = posY + "px";
-  target.style.left = 190 + "px";
-  target.style.height = 150 * 2 + "px";
-  target.style.width = 150 * 3.5 + "px";
-  target.classList.add("active");
+    this.moveUp = function (){
+      var requestID = 0;
+      startTime = Date.now();
+      requestID = requestAnimationFrame(up);
+    };
 
-  setTimeout(moveUp, fps);
-}
+    this.moveBack = function (){
+      var requestID = 0;
+      startTime = Date.now();
+      requestID = requestAnimationFrame(down);
+    };
 
+    function up(){
+      var currentTime = Date.now();
+      var progress = Math.floor((currentTime - startTime)) / duration || 1;
+      console.log("up - " + progress);
+      isUp = true;
+      _this.style.top = 500 - (progress * (500)) + "px";
+      _this.style.left = 1 + (progress * 1) + "px";
+      _this.style.height = (progress * 300) + "px";
+      _this.style.width = (progress * 525) + "px";
+      _this.classList.add("active");
 
-function mover(){
+      if(progress <= 1){
+        requestID = requestAnimationFrame(up);
+      };
+    };
 
-    moveUp();
+    function down(){
+      var currentTime = Date.now();
+      var progress = (currentTime - startTime) / duration;
+      console.log("down - " + progress);
+      isUp = false;
+      _this.style.top = 1 + (progress * 500 ) + "px";
+      _this.style.left = 0;
+      _this.style.height = 100 + (progress * 50) + "px";
+      _this.style.width = 180 + (progress * 1) + "px";
 
-}
+      if(progress <= 1){
+        requestID = requestAnimationFrame(down);
+      };
+    };
 
-  for(var i = 0; i < allItems.length; i++){
-    allItems[i].addEventListener("click", moveUp, false); 
-  } 
+  }; // gallery
 
-};// onload
+  //Add new gallery object
+  var gallery = new Gallery();
+  //check if the item is already up, if it is, bring it down.
+  if(isUp){
+    gallery.moveBack();
+    _this.classList.remove("active");
+  }else{
+    gallery.moveUp();
+  }
+
+  
+};
+  
+for(var i = 0; i < allItems.length; i++){
+  allItems[i].addEventListener("click", animate); 
+} 
+
+});

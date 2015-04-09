@@ -1,31 +1,7 @@
 
 window.onload = function() {
   var $ = function (selector){return document.querySelector(selector);};  // this is not jQuery
-
-/* ############################################################## 
-                      Navigation
-   ############################################################## */
-  function toggleMenu(){
-    $("#main-nav").classList.toggle("open");
-    $(".overlay").classList.toggle("open");
-    $(".trigger").classList.toggle("open");
-    $("#body").classList.toggle("open");
-  }
-  
-  //behaviour if you click the menu button
-  $(".trigger").onclick = toggleMenu;
-  
-  //behaviour if you click a menu item
-  $("#main-nav").getElementsByTagName("li").onclick = toggleMenu;
-  
-  //behaviour if you click the overlay
-  $(".overlay").onclick = toggleMenu;
-
-
-/* ############################################################## 
-                      ASSIGNMENT #3 START
-   ############################################################## */
-  var allItems = $("#gallery").getElementsByTagName("img");
+  var allItems = $("#gallery").querySelectorAll(".gallery-item");
   var preview = $("#preview");
 
   function hideAll(){
@@ -48,7 +24,12 @@ window.onload = function() {
 
       this.startGrow = function() {
         growStartTime = Date.now();
-        requestAnimationFrame(update);
+        requestID = requestAnimationFrame(update);
+      };
+
+      this.endGrow = function() {
+        growStartTime = Date.now();
+        requestID = requestAnimationFrame(down);
       };
 
       function update() {
@@ -64,17 +45,37 @@ window.onload = function() {
           
           
       if (positionInGrow <= 1)
-        requestAnimationFrame(update);
+        requestID = requestAnimationFrame(update);
+      }
+
+      function down() {
+        var currentTime = Date.now();
+        var positionInGrow = (currentTime - growStartTime) / growDuration;
+        var baseline = positionInGrow * 1;
+
+          _this.style.transform = "translateY(-150px)";
+
+          _this.style.height =  Math.floor(baseline) * 5.0 + "px";
+          _this.style.width =  Math.floor(baseline) * 1 + "%";  
+        
+          
+          
+      if (positionInGrow <= 1)
+        requestID = requestAnimationFrame(down);
       }
     };
       var gallery = new Grow();
 
-      gallery.startGrow();
-
+      function start(){
+        gallery.startGrow();
+      }
+start();
   } // animated
 
 
   for(var i = 0; i < allItems.length; i++){
+
+    allItems[i].addEventListener("click", animate);
 
     allItems[i].addEventListener("click", animate); 
   } 
