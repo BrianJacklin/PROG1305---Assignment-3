@@ -25,7 +25,7 @@ window.onload = function() {
 /* ############################################################## 
                       ASSIGNMENT #3 START
    ############################################################## */
-  var allItems = $("#gallery-items").getElementsByTagName("img");
+  var allItems = $("#gallery").getElementsByTagName("img");
   var preview = $("#preview");
 
   function hideAll(){
